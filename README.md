@@ -143,7 +143,7 @@ Definition of the different states and their transition (transition functions)
 
 ## Task
 - create files javascript
-- Main - builDom
+- Main - buildDom
 - Main - create main()
 - Main - buildSplash
 - Main - addEventListener
