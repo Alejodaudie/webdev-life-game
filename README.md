@@ -144,12 +144,11 @@ Definition of the different states and their transition (transition functions)
 ## Task
 - create files javascript
 - Main - buildDom
-- Main - create main()
 - Main - buildSplash
 - Main - addEventListener
 - Main - destroySplash
-- Main - startGame
 - Game - buildDom
+- Game - TimeOut test
 - Main - GameOver
 - Main - destroy Game
 - Main - GameOver RESTART
