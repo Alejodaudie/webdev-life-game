@@ -29,31 +29,149 @@ The MVP version will be the first level of the game: a player and one kind of en
 
 
 ## Data structure
-Classes and methods definition.
+### game.js
+```javascript
+Game() {
+  self.gameIsOver
+  self.score
+}
+
+Game.prototype.start(
+  buildDom()
+  self.lives
+  self.score
+  self.input
+  self.canvas
+  self.width
+  self.height
+  webDev = new Player()
+  addEventListener
+  self.startLoop()
+)
+
+Game.prototype.startLoop(
+  ctx
+  loop() {
+    //create enemies now and then
+    enemies = new Enemy()
+    
+    //update positions
+    self.player.update()
+    self.enemies.update()
+    
+    //check if player collided with enemies and if true remove
+    self.checkIfEnemiesCollidedPlayer()
+    
+    //loose point
+    
+    //forget enemies outside the screen
+    self.enemies.filter(isInScreen())
+    
+    //erase canvas
+    ctx.clearRect()
+    
+    //draw
+    self.player.draw()
+    self.enemies.draw()
+    Frame(loop)
+   }
+   Frame(loop)
+)
+
+
+```
+### player.js
+```javascript
+Player(canvas, lives) {
+  self.x
+  self.y
+  self.direction 0
+  self.size
+  self.speed
+  self.canvas
+  self.ctx
+}
+
+Player.prototype.setDirection()
+Player.prototype.collidesWithEnemies() //than it will be also for the points
+Player.prototype.collided()
+Player.prototype.update()
+Player.prototype.draw()
+
+
+```
+### enemy.js
+```javascript
+Enemy(canvas, x, speed) {
+  self.x
+  self.y
+  self.direction 0
+  self.size
+  self.speed
+  self.canvas
+  self.ctx
+}
+
+Enemy.prototype.update()
+Enemy.prototype.draw()
+Enemy.prototype.isInScreen()
+
+```
 
 
 ## States y States Transitions
 Definition of the different states and their transition (transition functions)
 ```javascript
 - splashScreen()
-- gameScreen
-- gameoverScreen
+  - destroyGameOver(if)
+  - buildSplash()
+  - addEventListener(startGame)
+  
+  
+- starGame()
+  - destroySplash()
+  - destroyGameOver()
+  - create new Game()
+  - game.start()
+  
+  
+- gameOver()
+  - destroyGame()
+  - buildGameOver()
+  - addEventListener( if splashScreen, else starGame) 
 ```
 
 ## Task
-Task definition in order of priority
-
+- create files javascript
+- Main - builDom
+- Main - create main()
+- Main - buildSplash
+- Main - addEventListener
+- Main - destroySplash
+- Main - startGame
+- Game - buildDom
+- Main - GameOver
+- Main - destroy Game
+- Main - GameOver RESTART
+- Main - removeGameOver
+- Game - addEventListener
+- Game - create player
+- Player - create
+- Player - directions
+- Game - loop
+- Game - create enemies
+- Game - player and enemies position 
+- Game - collision + remove
+- Game - lives 
+- Game - clear
+- Game - gameOver
 
 ## Links
 
 
-### Trello
-[Link url](https://trello.com)
-
-
 ### Git
 URls for the project repo and deploy
-[Link Repo](http://github.com)
+[Link Repo](https://github.com/francescaropolo/webdev-life)
 [Link Deploy](http://github.com)
 
 
