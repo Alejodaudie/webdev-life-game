@@ -158,11 +158,13 @@ Definition of the different states and their transition (transition functions)
 - Player - create
 - Player - directions
 - Game - loop
-- Game - create enemies
 - Game - player and enemies position 
+- Game - clear
+- Game - create enemies
+- Enemy - create
+- Enemy - check if still in screen
 - Game - collision + remove
 - Game - lives 
-- Game - clear
 - Game - gameOver
 
 ## Links
