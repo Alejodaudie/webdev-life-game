@@ -29,9 +29,59 @@ Game.prototype.start = function () {
 
     document.body.appendChild(self.gameMain);
 
-    self.timeLeft = setTimeout( function() {
-        self.gameOver();
-    }, 3000)
+    self.canvasParentElement = self.gameMain.querySelector('.canvas');
+    self.canvasElement = self.canvasParentElement.querySelector('canvas');
+
+    self.width = self.canvasParentElement.offsetWidth;
+    self.height = self.canvasParentElement.offsetHeight;
+
+    self.canvasElement.setAttribute('width', self.width);
+    self.canvasElement.setAttribute('height', self.height);
+
+    self.player = new Player(self.canvasElement, 5);
+
+    self.handleKeyDown = function(event) {
+        if (event.key === 'ArrowLeft') {
+          self.player.setDirection(-1);
+        } else if (event.key === 'ArrowRight') {
+          self.player.setDirection(1);
+        }
+    }
+
+    document.body.addEventListener('keydown', self.handleKeyDown)
+
+    self.starLoop();
+    // self.timeLeft = setTimeout( function() {
+    //     self.gameOver();
+    // }, 3000)
+};
+
+Game.prototype.starLoop = function () {
+    var self = this;
+
+    
+
+    function loop () {
+
+        self.ctx = self.canvasElement.getContext('2d');
+
+        //update positions
+        self.player.update();
+
+
+        //erase canvas
+        self.ctx.clearRect(0, 0, self.width, self.height);
+
+        //draw
+        self.player.draw();
+
+        // if game is not over
+        if(!self.gameIsOver) {
+            window.requestAnimationFrame(loop);
+          }
+    }
+
+    window.requestAnimationFrame(loop);
 };
 
 Game.prototype.onOver = function (callback) {

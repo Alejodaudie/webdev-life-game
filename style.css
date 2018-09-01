@@ -40,6 +40,10 @@ html {
   
   
   /* ---- layout ---- */
+
+  html, body {
+    height: 100%;
+  }
   
   main {
     padding: 40px;
@@ -116,6 +120,10 @@ html {
   
   .game .value {
     font-style: italic;
+  }
+
+  .game .canvas {
+    flex: 1;
   }
   
   /* ---- section ---- */
