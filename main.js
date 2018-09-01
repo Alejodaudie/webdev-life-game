@@ -15,11 +15,15 @@ function main() {
     function buildSplash() {
         splashMain = buildDom(`
             <main>
-                <h1>WebDeveloper life</h1>
-                <div>
-                    <p></p>
+                <div class="intro container">
+                    <h1>WebDeveloper life</h1>
+                    <div>
+                        <p></p>
+                    </div>
+                    <div>
+                        <button class="button">Start</button>
+                    </div>
                 </div>
-                <button>Start</button>
             </main>
         `);
 
@@ -38,6 +42,7 @@ function main() {
 
     function startGame() {
         destroySplash();
+        destroyGameOver();
 
         game = new Game();
         game.start(); 
@@ -60,12 +65,29 @@ function main() {
     function buildGameOver() {
         gameOverMain = buildDom(`
             <main>
+            <div class="intro container">
                 <h1>Game over</h1>
-                <button>Restart</button>
+                <div>
+                    <p></p>
+                </div>
+                <div>
+                    <button class="button">Restart</button>
+                </div>
+            </div>
+                
             </main>
         `);
 
         document.body.appendChild(gameOverMain);
+
+        var button = gameOverMain.querySelector('button');
+        button.addEventListener('click', startGame);
+    }
+
+    function destroyGameOver() {
+        if(gameOverMain) {
+            gameOverMain.remove();
+        }
     }
 
    buildSplash();
