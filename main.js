@@ -9,6 +9,7 @@ function buildDom(html) {
 function main() {
     
     var splashMain;
+    var gameOverMain;
     var game;
 
     function buildSplash() {
@@ -33,13 +34,39 @@ function main() {
         splashMain.remove();
     }
 
+    // -- game
+
     function startGame() {
         destroySplash();
 
         game = new Game();
         game.start(); 
+        game.onOver(function() {
+            gameOverTransition();
+        });
     }
+
+    function destroyGame() {
+        game.destroy();
+    }
+
+    // -- game-over
     
+    function gameOverTransition() {
+        destroyGame();
+        buildGameOver();
+    }
+
+    function buildGameOver() {
+        gameOverMain = buildDom(`
+            <main>
+                <h1>Game over</h1>
+                <button>Restart</button>
+            </main>
+        `);
+
+        document.body.appendChild(gameOverMain);
+    }
 
    buildSplash();
 }

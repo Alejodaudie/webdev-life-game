@@ -2,6 +2,8 @@
 
 function Game() {
     var self = this;
+
+    self.gameIsOver = false;
 }
 
 Game.prototype.start = function () {
@@ -26,4 +28,27 @@ Game.prototype.start = function () {
     `);
 
     document.body.appendChild(self.gameMain);
+
+    self.timeLeft = setTimeout( function() {
+        self.gameOver();
+    }, 3000)
+};
+
+Game.prototype.onOver = function (callback) {
+    var self = this;
+
+    self.onGameOverCallback = callback;
+};
+
+Game.prototype.gameOver = function () {
+    var self = this;
+
+    self.gameIsOver = true;
+    self.onGameOverCallback();
+};
+
+Game.prototype.destroy = function () {
+    var self = this;
+
+    self.gameMain.remove();
 };
