@@ -10,7 +10,7 @@ Game.prototype.start = function () {
     var self = this;
 
     self.gameMain = buildDom(`
-        <main class="game container">
+        <main class="game">
             <header>
                 <div class="lives">
                     <span class="label">Lives :</span>
@@ -32,8 +32,12 @@ Game.prototype.start = function () {
     self.canvasParentElement = self.gameMain.querySelector('.canvas');
     self.canvasElement = self.canvasParentElement.querySelector('canvas');
 
-    self.width = self.canvasParentElement.offsetWidth;
-    self.height = self.canvasParentElement.offsetHeight;
+    // self.width = self.canvasParentElement.offsetWidth;
+    // self.height = self.canvasParentElement.offsetHeight;
+
+    self.width = 700;
+    self.height = 400;
+
 
     self.canvasElement.setAttribute('width', self.width);
     self.canvasElement.setAttribute('height', self.height);

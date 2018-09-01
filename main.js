@@ -14,10 +14,12 @@ function main() {
 
     function buildSplash() {
         splashMain = buildDom(`
-            <main>
-                <div class="intro container">
-                    <h1>WebDeveloper life</h1>
-                    <div>
+            <main class="container">
+                <div class="intro">
+                    <h1>Web <br>
+                    Developer <br>
+                    Life</h1>
+                    <div class="rules">
                         <p></p>
                     </div>
                     <div>
