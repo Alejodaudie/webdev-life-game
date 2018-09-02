@@ -10,15 +10,23 @@ function main() {
     
     var splashMain;
     var gameOverMain;
+    var usernameInputElement;
+    var usernameValue;
+
     var game;
 
     function buildSplash() {
+        destroyGameOver();
         splashMain = buildDom(`
             <main class="container">
                 <div class="intro">
                     <h1>Web <br>
                     Developer <br>
                     Life</h1>
+                    <div>
+                        <label>Name :</label>
+                        <input type="text" placeholder='Developer name'> 
+                    </div>
                     <div class="rules">
                         <p></p>
                     </div>
@@ -30,6 +38,8 @@ function main() {
         `);
 
         document.body.appendChild(splashMain);
+
+        usernameInputElement = document.querySelector('input');
 
         var button = splashMain.querySelector('button');
         button.addEventListener('click', startGame);
@@ -46,10 +56,12 @@ function main() {
         destroySplash();
         destroyGameOver();
 
-        game = new Game();
+        usernameValue = usernameInputElement.value;
+
+        game = new Game(usernameValue);
         game.start(); 
         game.onOver(function() {
-            gameOverTransition();
+            gameOverTransition(game.score);
         });
     }
 
@@ -59,21 +71,25 @@ function main() {
 
     // -- game-over
     
-    function gameOverTransition() {
+    function gameOverTransition(score) {
         destroyGame();
-        buildGameOver();
+        buildGameOver(score);
     }
 
-    function buildGameOver() {
+    function buildGameOver(score) {
         gameOverMain = buildDom(`
             <main>
-            <div class="intro container">
+            <div class="game-over">
                 <h1>Game over</h1>
-                <div>
-                    <p></p>
-                </div>
-                <div>
-                    <button class="button">Restart</button>
+                <p>Hey <span class='username'></span> this is your score : <span class='score'></span></p>
+                <div class="buttons">
+                    <div class="restart-buttons">
+                        <button class="button">Restart</button>
+                    </div>
+                    <p> or </p>
+                    <div class="change-buttons">
+                        <button class="change">Change WebDev</button>
+                    </div>
                 </div>
             </div>
                 
@@ -84,6 +100,15 @@ function main() {
 
         var button = gameOverMain.querySelector('button');
         button.addEventListener('click', startGame);
+
+        var buttonChange = gameOverMain.querySelector('.change');
+        buttonChange.addEventListener('click', buildSplash);
+
+        var span = gameOverMain.querySelector('.score');
+        span.innerText = score;
+
+        var name = gameOverMain.querySelector('.username');
+        name.innerText = usernameValue;
     }
 
     function destroyGameOver() {

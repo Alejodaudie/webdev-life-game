@@ -76,7 +76,8 @@ html {
   
 
   /* --- splash --- */
-  .intro {
+  .intro,
+  .game-over {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -136,6 +137,42 @@ html {
     font-style: italic;
   }
 
+  /* --- game-over --- */
+
+  .game-over h1 {
+    flex:1;
+    margin-bottom: 40px;
+  }
+
+  .game-over p {
+    flex:1;
+  }
+
+  .game-over .buttons {
+    flex: 1;
+    display: flex;
+    justify-content: left;
+  }
+
+  .buttons .restart-button {
+    flex: 1;
+  }
+  
+  .buttons p {
+    flex: 1;
+    text-align: center;
+  }
+
+  .buttons .change-button {
+    flex: 1;
+  }
+
+  .change {
+    padding: 10px 25px;
+    background-color: #E3514C;
+    color: #F1F1E7;
+    border: none;
+  }
   
   /* ---- section ---- */
   

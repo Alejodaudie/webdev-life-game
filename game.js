@@ -1,10 +1,11 @@
 'use strict';
 
-function Game() {
+function Game(username) {
     var self = this;
 
     self.gameIsOver = false;
     self.score = 0;
+    self.username = username;
 }
 
 Game.prototype.start = function () {
@@ -16,6 +17,9 @@ Game.prototype.start = function () {
                 <div class="lives">
                     <span class="label">Lives :</span>
                     <span class="value"></span>
+                </div>
+                <div class='username'>
+                    <p></p>
                 </div>
                 <div class="score">
                     <span class="label">Score :</span>
@@ -32,6 +36,9 @@ Game.prototype.start = function () {
 
     self.canvasParentElement = self.gameMain.querySelector('.canvas');
     self.canvasElement = self.canvasParentElement.querySelector('canvas');
+
+    self.usernameElement = self.gameMain.querySelector('.username p');
+  self.usernameElement.innerText = self.username;
 
     self.livesElement = self.gameMain.querySelector('.lives .value');
     self.scoreElement = self.gameMain.querySelector('.score .value');
