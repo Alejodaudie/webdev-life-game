@@ -1,6 +1,6 @@
 'use strict';
 
-function Enemy (canvas, x, speed) {
+function Live (canvas, x, speed) {
     var self = this;
 
     self.canvasElement = canvas;
@@ -11,26 +11,23 @@ function Enemy (canvas, x, speed) {
     self.ctx = self.canvasElement.getContext('2d');
 }
 
-Enemy.prototype.update = function () {
+Live.prototype.update = function () {
     var self = this;
 
     self.y = self.y + self.speed;
 };
 
-Enemy.prototype.draw = function () {
+Live.prototype.draw = function () {
     var self = this;
 
-    self.ctx.fillStyle = '#E3514C';
-
+    self.ctx.fillStyle = '#E69B0C';
     self.xPosition = self.x - (self.size/2);
     self.yPosition = self.y - (self.size/2);
     self.ctx.fillRect(self.xPosition, self.yPosition, self.size, self.size);
-
 };
 
-Enemy.prototype.isInScreen = function () {
+Live.prototype.isInScreen = function () {
     var self = this;
     //  if x is smaller than 0 remove from the arry
-    return self.canvasElement.height + self.size / 2 > 0;
-};
-
+    return self.x + self.size / 2 > 0;
+}

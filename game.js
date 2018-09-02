@@ -4,6 +4,7 @@ function Game() {
     var self = this;
 
     self.gameIsOver = false;
+    self.score = 0;
 }
 
 Game.prototype.start = function () {
@@ -32,6 +33,10 @@ Game.prototype.start = function () {
     self.canvasParentElement = self.gameMain.querySelector('.canvas');
     self.canvasElement = self.canvasParentElement.querySelector('canvas');
 
+    self.livesElement = self.gameMain.querySelector('.lives .value');
+    self.scoreElement = self.gameMain.querySelector('.score .value');
+    
+
     // self.width = self.canvasParentElement.offsetWidth;
     // self.height = self.canvasParentElement.offsetHeight;
 
@@ -57,6 +62,8 @@ Game.prototype.start = function () {
     self.starLoop();
 
     self.enemies = [];
+    self.points = [];
+    self.lives = [];
     // self.timeLeft = setTimeout( function() {
     //     self.gameOver();
     // }, 3000)
@@ -65,17 +72,29 @@ Game.prototype.start = function () {
 Game.prototype.starLoop = function () {
     var self = this;
 
+    self.ctx = self.canvasElement.getContext('2d');
     
 
     function loop () {
 
-        self.ctx = self.canvasElement.getContext('2d');
-
+        // create more enemies now and then
         if (Math.random() > 0.95) {
             var x = self.canvasElement.width * Math.random();
             self.enemies.push(new Enemy(self.canvasElement, x, 5));
-          }
-          
+        }
+        
+        // create more points now and then
+        if (Math.random() > 0.99) {
+            var x = self.canvasElement.width * Math.random();
+            self.points.push(new Point(self.canvasElement, x, 6));
+        }
+        
+        // create more lives now and then
+        if (Math.random() > 0.999) {
+            var x = self.canvasElement.width * Math.random();
+            self.lives.push(new Live(self.canvasElement, x, 8));
+        }
+
         //update positions
         self.player.update();
 
@@ -83,11 +102,36 @@ Game.prototype.starLoop = function () {
             item.update();
         });
 
+        self.points.forEach(function(item) {
+            item.update();
+        });
 
+        self.lives.forEach(function(item) {
+            item.update();
+        });
+
+        //check positions
         self.enemies = self.enemies.filter(function(item) {
         return item.isInScreen();
         });
 
+        self.points = self.points.filter(function(item) {
+            return item.isInScreen();
+        });
+
+        self.lives = self.lives.filter(function(item) {
+            return item.isInScreen();
+          });
+
+
+        // check if player collide with enemy
+        self.checkIfEnemiesCollidedPlayer();
+        self.checkIfPointsCollidedPlayer();
+        self.checkIfLivesCollidedPlayer();
+
+        // - loose life or win points
+        self.livesElement.innerText = self.player.lives;
+        self.scoreElement.innerText = self.score;
 
         //erase canvas
         self.ctx.clearRect(0, 0, self.width, self.height);
@@ -101,6 +145,14 @@ Game.prototype.starLoop = function () {
             item.draw();
         });
 
+        self.points.forEach(function(item) {
+            item.draw();
+        });
+
+        self.lives.forEach(function(item) {
+            item.draw();
+        });
+
         // if game is not over
         if(!self.gameIsOver) {
             window.requestAnimationFrame(loop);
@@ -109,6 +161,43 @@ Game.prototype.starLoop = function () {
 
     window.requestAnimationFrame(loop);
 };
+
+Game.prototype.checkIfEnemiesCollidedPlayer = function() {
+    var self = this;
+
+    self.enemies.forEach(function (item, index) {
+        if (self.player.collidesWithEnemy(item)) {
+            self.player.collided();
+            self.enemies.splice(index,1);
+
+            if (!self.player.lives) {
+                self.gameOver();
+            }
+        }
+    });
+};
+
+Game.prototype.checkIfPointsCollidedPlayer = function () {
+    var self = this;
+  
+    self.points.forEach(function (item, index) {
+      if (self.player.collidesWithEnemy(item)) {
+        self.points.splice(index, 1);
+        self.score++;
+      };
+    });
+};
+
+Game.prototype.checkIfLivesCollidedPlayer = function () {
+    var self = this;
+  
+    self.lives.forEach(function (item, index) {
+      if (self.player.collidesWithLives(item)) {
+        self.player.collidedLive();
+        self.lives.splice(index, 1);
+      };
+    });
+  };
 
 Game.prototype.onOver = function (callback) {
     var self = this;

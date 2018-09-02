@@ -10,6 +10,8 @@ function Player (canvas, lives) {
     self.speed = 5;
     self.lives = lives;
     self.ctx = self.canvasElement.getContext('2d');
+    self.character = new Image();
+    self.character.src = './images/player-francesca.png'
 }
 
 Player.prototype.setDirection = function(direction) {
@@ -18,6 +20,47 @@ Player.prototype.setDirection = function(direction) {
     self.direction = direction;
 };
 
+Player.prototype.collidesWithEnemy = function (enemy) {
+    var self = this;
+    
+    const collidesRight = self.x + self.size / 2 > enemy.x - enemy.size / 2;
+    const collidesLeft = self.x - self.size / 2 < enemy.x + enemy.size / 2;
+    const collidesTop = self.y - self.size / 2 < enemy.y + enemy.size / 2;
+    const collidesBottom = self.y + self.size / 2 > enemy.y - enemy.size / 2;
+
+    if (collidesLeft && collidesRight && collidesTop && collidesBottom) {
+        return true;
+    }
+    
+    return false;
+};
+
+Player.prototype.collided = function (enemy) {
+    var self = this;
+    
+    self.lives--;
+};
+
+Player.prototype.collidesWithLives = function (enemy) {
+    var self = this;
+    
+    const collidesRight = self.x + self.size / 2 > enemy.x - enemy.size / 2;
+    const collidesLeft = self.x - self.size / 2 < enemy.x + enemy.size / 2;
+    const collidesTop = self.y - self.size / 2 < enemy.y + enemy.size / 2;
+    const collidesBottom = self.y + self.size / 2 > enemy.y - enemy.size / 2;
+
+    if (collidesLeft && collidesRight && collidesTop && collidesBottom) {
+        return true;
+    }
+    
+    return false;
+};
+
+Player.prototype.collidedLive = function () {
+    var self = this;
+    
+    self.lives++;
+};
 
 Player.prototype.update = function() {
     var self = this;
@@ -36,10 +79,10 @@ Player.prototype.update = function() {
 Player.prototype.draw = function() {
     var self = this;
 
-    self.ctx.fillStyle = '#FEF246';
-
+    
     // center the center
     self.xPosition = self.x - (self.size/2);
     self.yPosition = self.y - (self.size/2);
-    self.ctx.fillRect(self.xPosition, self.yPosition, self.size, self.size);
+    self.ctx.drawImage(self.character, self.xPosition, self.yPosition, self.size, self.size);
+    // self.ctx.fillRect(self.xPosition, self.yPosition, self.size, self.size);
 };
