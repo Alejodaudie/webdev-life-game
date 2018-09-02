@@ -55,6 +55,8 @@ Game.prototype.start = function () {
     document.body.addEventListener('keydown', self.handleKeyDown)
 
     self.starLoop();
+
+    self.enemies = [];
     // self.timeLeft = setTimeout( function() {
     //     self.gameOver();
     // }, 3000)
@@ -69,15 +71,35 @@ Game.prototype.starLoop = function () {
 
         self.ctx = self.canvasElement.getContext('2d');
 
+        if (Math.random() > 0.95) {
+            var x = self.canvasElement.width * Math.random();
+            self.enemies.push(new Enemy(self.canvasElement, x, 5));
+          }
+          
         //update positions
         self.player.update();
+
+        self.enemies.forEach(function(item) {
+            item.update();
+        });
+
+
+        self.enemies = self.enemies.filter(function(item) {
+        return item.isInScreen();
+        });
 
 
         //erase canvas
         self.ctx.clearRect(0, 0, self.width, self.height);
 
+        
+
         //draw
         self.player.draw();
+
+        self.enemies.forEach(function(item) {
+            item.draw();
+        });
 
         // if game is not over
         if(!self.gameIsOver) {
