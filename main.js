@@ -12,6 +12,7 @@ function main() {
     var gameOverMain;
     var usernameInputElement;
     var usernameValue;
+    
 
     var game;
 
@@ -31,7 +32,7 @@ function main() {
                         <p></p>
                     </div>
                     <div>
-                        <button class="button">Start</button>
+                        <button class="button">Play</button>
                     </div>
                 </div>
             </main>
@@ -82,9 +83,10 @@ function main() {
             <div class="game-over">
                 <h1>Game over</h1>
                 <p>Hey <span class='username'></span> this is your score : <span class='score'></span></p>
+                <p>High score : <span class="highest-score"></span></p>
                 <div class="buttons">
                     <div class="restart-buttons">
-                        <button class="button">Restart</button>
+                        <button class="button">Play Again</button>
                     </div>
                     <p> or </p>
                     <div class="change-buttons">
@@ -109,6 +111,9 @@ function main() {
 
         var name = gameOverMain.querySelector('.username');
         name.innerText = usernameValue;
+
+        // var highScoreElement = gameOverMain.querySelector('.highest-score');
+        // highScoreElement.innerHTML = highScore;
     }
 
     function destroyGameOver() {

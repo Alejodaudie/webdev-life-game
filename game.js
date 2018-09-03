@@ -4,8 +4,11 @@ function Game(username) {
     var self = this;
 
     self.gameIsOver = false;
-    self.score = 0;
     self.username = username;
+    // self.score = new Score(username);
+    self.score = 0;
+    self.isPause = false;
+    self.highScore = 0;
 }
 
 Game.prototype.start = function () {
@@ -38,7 +41,7 @@ Game.prototype.start = function () {
     self.canvasElement = self.canvasParentElement.querySelector('canvas');
 
     self.usernameElement = self.gameMain.querySelector('.username p');
-  self.usernameElement.innerText = self.username;
+    self.usernameElement.innerText = self.username;
 
     self.livesElement = self.gameMain.querySelector('.lives .value');
     self.scoreElement = self.gameMain.querySelector('.score .value');
@@ -81,6 +84,14 @@ Game.prototype.starLoop = function () {
 
     self.ctx = self.canvasElement.getContext('2d');
     
+    document.body.addEventListener('keyup', function(event) {
+        if(event.key === ' ') {
+            self.isPause = !self.isPause;
+            if(!self.isPause) {
+                loop();
+            }
+        }
+    });
 
     function loop () {
 
@@ -161,13 +172,26 @@ Game.prototype.starLoop = function () {
         });
 
         // if game is not over
-        if(!self.gameIsOver) {
+        if(!self.gameIsOver && !self.isPause) {
             window.requestAnimationFrame(loop);
           }
     }
 
     window.requestAnimationFrame(loop);
 };
+
+// Game.prototype.getHighScore = function (score) {
+//     var self = this;
+    
+//     self.highScore = localStorage.getItem(score)
+// };
+
+// Game.prototype.compareHighScore = function () {
+//     if (self.player.score > self.highScore) {
+//         localStorage.setItem('self.highScore', 'self.player.score');
+//     }
+// }
+
 
 Game.prototype.checkIfEnemiesCollidedPlayer = function() {
     var self = this;

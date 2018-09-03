@@ -11,7 +11,7 @@ function Player (canvas, lives) {
     self.lives = lives;
     self.ctx = self.canvasElement.getContext('2d');
     self.character = new Image();
-    self.character.src = './images/player-francesca.png'
+    self.character.src = './images/player-francesca.png';
 }
 
 Player.prototype.setDirection = function(direction) {
