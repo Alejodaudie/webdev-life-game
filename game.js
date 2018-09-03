@@ -5,7 +5,6 @@ function Game(username) {
 
     self.gameIsOver = false;
     self.username = username;
-    // self.score = new Score(username);
     self.score = 0;
     self.isPause = false;
     self.highScore = 0;
@@ -74,9 +73,6 @@ Game.prototype.start = function () {
     self.enemies = [];
     self.points = [];
     self.lives = [];
-    // self.timeLeft = setTimeout( function() {
-    //     self.gameOver();
-    // }, 3000)
 };
 
 Game.prototype.starLoop = function () {
@@ -176,6 +172,7 @@ Game.prototype.starLoop = function () {
             window.requestAnimationFrame(loop);
           }
     }
+
 
     window.requestAnimationFrame(loop);
 };

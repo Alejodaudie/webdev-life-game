@@ -83,7 +83,23 @@ function main() {
             <div class="game-over">
                 <h1>Game over</h1>
                 <p>Hey <span class='username'></span> this is your score : <span class='score'></span></p>
-                <p>High score : <span class="highest-score"></span></p>
+                <div class"list-high-scores">
+                    <p>High score :</p>
+                    <ul class="list-scores">
+                        <li class="list-item0">
+                            <p class="name0"></p>
+                            <p class="score0"></p>
+                        </li>
+                        <li class="list-item1">
+                            <p class="name1"></p>
+                            <p class="score1"></p>
+                        </li>
+                        <li class="list-item2">
+                            <p class="name2"></p>
+                            <p class="score2"></p>
+                        </li>
+                    </ul>
+                </div>
                 <div class="buttons">
                     <div class="restart-buttons">
                         <button class="button">Play Again</button>
@@ -109,11 +125,22 @@ function main() {
         var span = gameOverMain.querySelector('.score');
         span.innerText = score;
 
-        var name = gameOverMain.querySelector('.username');
-        name.innerText = usernameValue;
+        var username = gameOverMain.querySelector('.username');
+        username.innerText = usernameValue;
 
-        // var highScoreElement = gameOverMain.querySelector('.highest-score');
-        // highScoreElement.innerHTML = highScore;
+        var newScore = {
+            username : usernameValue,
+            score : score
+        };
+
+        saveScore(newScore);
+
+        var listHighScores = JSON.parse(localStorage.getItem('scores'));
+
+        if (listHighScores) {
+            displayScores(listHighScores)
+        }
+
     }
 
     function destroyGameOver() {
@@ -123,6 +150,44 @@ function main() {
     }
 
    buildSplash();
+
+   function saveScore (score) {
+        var scoreList = [];
+        if(!localStorage.getItem('scores')) {
+           scoreList.push(score);
+           scoreList.sort(function (a , b) {
+            return b.score - a.score;
+           });
+           localStorage.setItem('scores', JSON.stringify(scoreList)); 
+        } else {
+           var scoreList = JSON.parse(localStorage.getItem('scores'));
+           scoreList.push(score);
+           scoreList.sort(function (a , b) {
+            return b.score - a.score;
+           });
+           localStorage.setItem('scores', JSON.stringify(scoreList));
+        }
+
+        JSON.parse(localStorage.getItem('scores'));
+
+   }
+
+   function displayScores (scores) {
+       var numScoresToDisplay = 3;
+       if (scores.length < 3) {
+           numScoresToDisplay = scores.length;
+       }
+
+       for (var i = 0; i < numScoresToDisplay; i++) {
+        var name =  gameOverMain.querySelector('.name' + i);
+        name.innerText = scores[i].username;
+
+        var score = gameOverMain.querySelector('.score' + i);
+        score.innerText = scores[i].score;
+       }
+   }
 }
 
+
+// @todo scorescreen from splash, exit button from game
 window.addEventListener('load', main);
