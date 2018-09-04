@@ -1,0 +1,56 @@
+.high-score-screen {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 400px;
+    width: 100%;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .button-esc {
+        flex : 1;
+        text-align: right;
+
+        button {
+            font-size: 40px;
+            background: none;
+            border: none;
+            color: $red-color;
+        }
+    }
+
+    .list-high-scores {
+        flex: 1;
+        margin-bottom: 30px;
+    }
+    
+    h3 {
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .list-scores {
+        margin: 0 auto;
+    }
+
+    li {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid $yellow-color;
+        
+
+        p {
+        flex: 1;
+        text-align: center;
+        }
+
+        .name {
+        text-align: left;
+        }
+    }
+}

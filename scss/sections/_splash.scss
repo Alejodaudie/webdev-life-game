@@ -15,9 +15,30 @@
       flex:1;
     }
   
-    button {
+    .buttons {
       flex: 1;
+      display: flex;
+      justify-content: space-around;
+
+      div {
+        flex: 1;
+      }
+
+      .button {
+        padding: 10px 55px;
+        background-color: $blue-color;
+        color: $white-color;
+        border: none;
+      }   //here or in components????
+  
+      .high-score-button {
+        padding: 10px 25px;
+        background-color: $yellow-color;
+        color: $white-color;
+        border: none;
+      }
     }
+
   }
 
 

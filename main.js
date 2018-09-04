@@ -10,14 +10,19 @@ function main() {
     
     var splashMain;
     var gameOverMain;
+    var highScoreMain;
     var usernameInputElement;
     var usernameValue;
+    var characterScreen;
     
 
     var game;
+    
 
     function buildSplash() {
         destroyGameOver();
+        destroyHighScoreScreen();
+
         splashMain = buildDom(`
             <main class="container">
                 <div class="intro">
@@ -31,8 +36,13 @@ function main() {
                     <div class="rules">
                         <p></p>
                     </div>
-                    <div>
-                        <button class="button">Play</button>
+                    <div class="buttons">
+                        <div>
+                            <button class="button">Play</button>
+                        </div>
+                        <div>
+                            <button class="high-score-button">High Scores</button>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -42,8 +52,11 @@ function main() {
 
         usernameInputElement = document.querySelector('input');
 
-        var button = splashMain.querySelector('button');
-        button.addEventListener('click', startGame);
+        var button = splashMain.querySelector('.button');
+        button.addEventListener('click', choseCharacter);
+
+        var buttonHighscore = splashMain.querySelector('.high-score-button');
+        buttonHighscore.addEventListener('click', highScoreScreen);
 
     }
 
@@ -51,13 +64,35 @@ function main() {
         splashMain.remove();
     }
 
+    function choseCharacter() {
+        destroySplash();
+
+        usernameValue = usernameInputElement.value;
+
+        characterScreen = new Character(usernameValue, characterTransition);
+        characterScreen.display();
+
+        characterScreen.onOver(function() {
+            characterTransition();
+        });
+    }
+
+    function destroyCharacterScreen() {
+        characterScreen.destroy();
+    }
+
+    function characterTransition() {
+        destroyCharacterScreen();
+        startGame();
+    }
+
     // -- game
 
     function startGame() {
         destroySplash();
         destroyGameOver();
+        destroyHighScoreScreen();
 
-        usernameValue = usernameInputElement.value;
 
         game = new Game(usernameValue);
         game.start(); 
@@ -128,17 +163,26 @@ function main() {
         var username = gameOverMain.querySelector('.username');
         username.innerText = usernameValue;
 
-        var newScore = {
-            username : usernameValue,
-            score : score
-        };
+        var newScore;
+
+        if (!usernameValue || '') {
+            newScore = {
+                username : 'Diva',
+                score : score
+            };
+        } else {
+            newScore = {
+                username : usernameValue,
+                score : score
+            };
+        }
 
         saveScore(newScore);
 
         var listHighScores = JSON.parse(localStorage.getItem('scores'));
 
         if (listHighScores) {
-            displayScores(listHighScores)
+            displayScores(3, listHighScores, gameOverMain)
         }
 
     }
@@ -172,21 +216,104 @@ function main() {
 
    }
 
-   function displayScores (scores) {
-       var numScoresToDisplay = 3;
-       if (scores.length < 3) {
+   function displayScores (n, scores, whatMain) {
+       var numScoresToDisplay = n;
+       if (scores.length < n) {
            numScoresToDisplay = scores.length;
        }
 
        for (var i = 0; i < numScoresToDisplay; i++) {
-        var name =  gameOverMain.querySelector('.name' + i);
+        var name =  whatMain.querySelector('.name' + i);
         name.innerText = scores[i].username;
 
-        var score = gameOverMain.querySelector('.score' + i);
+        var score = whatMain.querySelector('.score' + i);
         score.innerText = scores[i].score;
        }
    }
+
+    // ---- Top10 Screen
+
+    function highScoreScreen(score) {
+        destroySplash();
+
+        highScoreMain = buildDom(`
+            <main class="container">
+                <div class="high-score-screen">
+                    <div class="button-esc">
+                        <button class="esc">x</button>
+                    </div>
+                    <h1>Top 10</h1>
+                    <div class="list-high-scores">
+                        <ul class="list-scores">
+                            <li>
+                                <p class="name0 name"></p>
+                                <p class="score0"></p>
+                            </li>
+                            <li>
+                                <p class="name1 name"></p>
+                                <p class="score1"></p>
+                            </li>
+                            <li>
+                                <p class="name2 name"></p>
+                                <p class="score2"></p>
+                            </li>
+                            <li>
+                                <p class="name3 name"></p>
+                                <p class="score3"></p>
+                            </li>
+                            <li>
+                                <p class="name4 name"></p>
+                                <p class="score4"></p>
+                            </li>
+                            <li>
+                                <p class="name5 name"></p>
+                                <p class="score5"></p>
+                            </li>
+                            <li>
+                                <p class="name6 name"></p>
+                                <p class="score6"></p>
+                            </li>
+                            <li>
+                                <p class="name7 name"></p>
+                                <p class="score7"></p>
+                            </li>
+                            <li>
+                                <p class="name8 name"></p>
+                                <p class="score8"></p>
+                            </li>
+                            <li>
+                                <p class="name9 name"></p>
+                                <p class="score9"></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        `);
+
+        document.body.appendChild(highScoreMain);
+
+        var esc = highScoreMain.querySelector('.esc');
+        esc.addEventListener('click', buildSplash);
+
+    
+
+        var listHighScores = JSON.parse(localStorage.getItem('scores'));
+
+        if (listHighScores) {
+            displayScores(10, listHighScores, highScoreMain)
+        }
+    }
+
+    function destroyHighScoreScreen() {
+        if(highScoreMain) {
+            highScoreMain.remove();
+        }
+    }
+
 }
+
+
 
 
 // @todo scorescreen from splash, exit button from game

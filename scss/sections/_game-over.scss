@@ -53,8 +53,15 @@
       justify-content: left;
 
 
-      .restart-button {
+      .restart-buttons {
         flex: 1;
+
+        button {
+          padding: 10px 14px;
+          background-color: $blue-color;
+          color: $white-color;
+          border: none;
+        }
       }
        
       p {
@@ -62,7 +69,7 @@
         text-align: center;
       }
        
-      .change-button {
+      .change-buttons {
         flex: 1;
       }
        
