@@ -4,12 +4,24 @@ function Enemy (canvas, x, speed) {
     var self = this;
 
     self.canvasElement = canvas;
-    self.size = 20;
+    self.size = 25;
     self.y = 0 - self.size;
     self.x = x;
     self.speed = speed;
+    self.enemyImage = new Image();
+    self.enemiesChoices = ["./images/undifined.png","./images/unexpected.png","./images/error.png"];
+    self.enemyImage.src = self.getRandomImage();
     self.ctx = self.canvasElement.getContext('2d');
 }
+
+Enemy.prototype.getRandomImage = function () {
+    var self = this;
+
+    var randomNum = Math.floor(Math.random() * self.enemiesChoices.length);
+    return self.enemiesChoices[randomNum];
+    
+};
+
 
 Enemy.prototype.update = function () {
     var self = this;
@@ -24,7 +36,7 @@ Enemy.prototype.draw = function () {
 
     self.xPosition = self.x - (self.size/2);
     self.yPosition = self.y - (self.size/2);
-    self.ctx.fillRect(self.xPosition, self.yPosition, self.size, self.size);
+    self.ctx.drawImage(self.enemyImage, self.xPosition, self.yPosition, self.size, self.size);
 
 };
 

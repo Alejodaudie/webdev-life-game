@@ -4,12 +4,23 @@ function Point (canvas, x, speed) {
     var self = this;
 
     self.canvasElement = canvas;
-    self.size = 20;
+    self.size = 25;
     self.y = 0 - self.size;
     self.x = x;
     self.speed = speed;
+    self.pointImage = new Image();
+    self.pointsChoices = ["./images/beer.png","./images/coffe.png","./images/pingpong.png"];
+    self.pointImage.src = self.getRandomImage();
     self.ctx = self.canvasElement.getContext('2d');
 }
+
+Point.prototype.getRandomImage = function () {
+    var self = this;
+
+    var randomNum = Math.floor(Math.random() * self.pointsChoices.length);
+    return self.pointsChoices[randomNum];
+    
+};
 
 Point.prototype.update = function () {
     var self = this;
@@ -24,7 +35,7 @@ Point.prototype.draw = function () {
 
     self.xPosition = self.x - (self.size/2);
     self.yPosition = self.y - (self.size/2);
-    self.ctx.fillRect(self.xPosition, self.yPosition, self.size, self.size);
+    self.ctx.drawImage(self.pointImage, self.xPosition, self.yPosition, self.size, self.size);
 
 };
 

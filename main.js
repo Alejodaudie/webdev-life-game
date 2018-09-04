@@ -1,4 +1,5 @@
 'use strict';
+var characterSelected;
 
 function buildDom(html) {
     var div = document.createElement('div');
@@ -22,6 +23,7 @@ function main() {
     function buildSplash() {
         destroyGameOver();
         destroyHighScoreScreen();
+        destroyCharacterScreen();
 
         splashMain = buildDom(`
             <main class="container">
@@ -69,21 +71,32 @@ function main() {
 
         usernameValue = usernameInputElement.value;
 
-        characterScreen = new Character(usernameValue, characterTransition);
+        characterScreen = new Character(usernameValue, characterTransitionToPlay, characterTransitionToBack, characterSelected);
         characterScreen.display();
 
-        characterScreen.onOver(function() {
-            characterTransition();
+        characterScreen.toPlay(function() {
+            characterTransitionToPlay();
+        });
+
+        characterScreen.toBack(function() {
+            characterTransitionToBack();
         });
     }
 
     function destroyCharacterScreen() {
-        characterScreen.destroy();
+        if (characterScreen) {
+            characterScreen.destroy();
+        }
     }
 
-    function characterTransition() {
+    function characterTransitionToPlay() {
         destroyCharacterScreen();
         startGame();
+    }
+
+    function characterTransitionToBack() {
+        destroyCharacterScreen();
+        buildSplash();
     }
 
     // -- game
@@ -94,7 +107,7 @@ function main() {
         destroyHighScoreScreen();
 
 
-        game = new Game(usernameValue);
+        game = new Game(usernameValue, characterSelected);
         game.start(); 
         game.onOver(function() {
             gameOverTransition(game.score);
@@ -233,7 +246,7 @@ function main() {
 
     // ---- Top10 Screen
 
-    function highScoreScreen(score) {
+    function highScoreScreen() {
         destroySplash();
 
         highScoreMain = buildDom(`

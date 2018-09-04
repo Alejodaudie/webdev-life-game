@@ -2,6 +2,7 @@
 
 function Player (canvas, lives) {
     var self = this;
+
     self.canvasElement = canvas;
     self.x = self.canvasElement.width / 2;
     self.y = self.canvasElement.height - 30;
@@ -11,7 +12,18 @@ function Player (canvas, lives) {
     self.lives = lives;
     self.ctx = self.canvasElement.getContext('2d');
     self.character = new Image();
-    self.character.src = './images/player-francesca.png';
+    self.charactersChoices = ["./images/player-barbara.png","./images/player-diana.png","./images/player-caroline.png","./images/player-axel.png","./images/player-gabriela.png","./images/player-francesca.png","./images/player-yenderly.png","./images/player-jonathan.png","./images/player-mariaj.png"];
+    self.character.src = self.chooseImg();
+}
+
+Player.prototype.chooseImg = function() {
+    var self = this;
+
+    if (characterSelected === 'barbara') {
+        return self.charactersChoices[0];
+    } else if (characterSelected === 'diana') {
+        return self.charactersChoices[1];
+    }
 }
 
 Player.prototype.setDirection = function(direction) {

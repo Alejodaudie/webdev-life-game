@@ -1,0 +1,72 @@
+.characters-screen {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+
+    h1 {
+        flex: 1;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .characters-icons {
+        flex: 1;
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        div {
+            flex : 1;
+        }
+
+        img {
+            width: 170px;
+
+            &.selected {
+                border: 5px solid $yellow-color;
+            }
+        }
+    }
+
+    .go-game {
+        flex: 1;
+        display: flex;
+        text-align: center;
+
+        div {
+            flex: 1;
+        }
+
+        button {
+            padding: 10px 55px;
+            color: $white-color;
+            border: none;
+        }
+
+        .button-play {   
+            background-color: $blue-color;
+        }
+
+        .button-back {   
+            background-color: $green-color;
+        }
+
+    }
+}
+
+@media (max-width: 1246px) {
+    .characters-screen {
+        h1 {
+            font-size: 50px;
+        }
+        .characters-icons {
+
+            img {
+                width: 100px;
+            }
+        }
+    }
+}
