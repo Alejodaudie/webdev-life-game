@@ -1,0 +1,29 @@
+
+  body {
+    color: $text-color;
+    font-family: 'VT323', monospace;
+    font-size: 26px;
+    line-height: 147%;
+  }
+  
+  h1 {
+    font-family: 'VT323', monospace;
+    font-size: 90px;
+    color: $text-color;
+    text-transform: uppercase;
+    line-height: 64px;
+    
+  }
+  
+  h2 {}
+  
+  h3 {}
+  
+  p {
+    margin: 0;
+  }
+  
+  button {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+  }

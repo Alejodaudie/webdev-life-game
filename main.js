@@ -83,19 +83,19 @@ function main() {
             <div class="game-over">
                 <h1>Game over</h1>
                 <p>Hey <span class='username'></span> this is your score : <span class='score'></span></p>
-                <div class"list-high-scores">
-                    <p>High score :</p>
+                <div class="list-high-scores">
+                    <h3>High score</h3>
                     <ul class="list-scores">
                         <li class="list-item0">
-                            <p class="name0"></p>
+                            <p class="name0 name"></p>
                             <p class="score0"></p>
                         </li>
                         <li class="list-item1">
-                            <p class="name1"></p>
+                            <p class="name1 name"></p>
                             <p class="score1"></p>
                         </li>
                         <li class="list-item2">
-                            <p class="name2"></p>
+                            <p class="name2 name"></p>
                             <p class="score2"></p>
                         </li>
                     </ul>

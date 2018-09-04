@@ -1,0 +1,31 @@
+.game {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    header {
+      height: 50px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .lives {
+      flex: 1;
+    }
+    
+    .score {
+      flex: 1;
+    }
+    
+    .label {
+      font-weight: bold; //in typo???
+    }
+    
+    .value {
+      font-style: italic; //in typo???
+    }
+  }
+  
+
+  

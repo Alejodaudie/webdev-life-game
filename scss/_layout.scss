@@ -1,0 +1,18 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  main {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  body {
+    background-color: $white-color;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+  }

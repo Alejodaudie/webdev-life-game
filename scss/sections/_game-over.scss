@@ -1,0 +1,77 @@
+.game-over {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 400px;
+
+    h1 {
+      flex:1;
+      margin-bottom: 40px;
+    }
+
+    p {
+      flex:1;
+    }
+ 
+    .list-high-scores {
+      flex: 1;
+      margin-bottom: 30px;
+    }
+    
+    h3 {
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .list-scores {
+      width: 240px;
+      margin: 0 auto;
+    }
+
+    li {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      
+
+      p {
+        flex: 1;
+        text-align: center;
+      }
+
+      .name {
+        padding-left: 35px;
+        text-align: left;
+      }
+    }
+
+    
+    .buttons {
+      flex: 1;
+      display: flex;
+      justify-content: left;
+
+
+      .restart-button {
+        flex: 1;
+      }
+       
+      p {
+        flex: 1;
+        text-align: center;
+      }
+       
+      .change-button {
+        flex: 1;
+      }
+       
+      .change {
+        padding: 10px 25px;
+        background-color: $red-color;
+        color: $white-color;
+        border: none;
+      }
+    }
+}
+

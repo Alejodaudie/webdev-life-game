@@ -179,3 +179,10 @@ URls for the project repo and deploy
 ### Slides
 URls for the project presentation (slides)
 [Link Slides.com](http://slides.com)
+
+
+## Development 
+
+This projecy uses SCSS. Use the following line to compile to CSS while you're coding :
+
+node-sass --output-style compressed --source-map true --watch style.scss style.css

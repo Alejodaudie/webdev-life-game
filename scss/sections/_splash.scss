@@ -1,0 +1,25 @@
+.intro {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 400px;
+
+  
+    h1 {
+      flex:1;
+      margin-bottom: 40px;
+      
+    }
+  
+    .rules {
+      flex:1;
+    }
+  
+    button {
+      flex: 1;
+    }
+  }
+
+
+
+ 
