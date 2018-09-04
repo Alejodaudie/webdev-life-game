@@ -1,0 +1,183 @@
+/* ---- reset ---- */
+
+html {
+    box-sizing: border-box;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  /* ---- typography ---- */
+  
+  body {
+    color: #222;
+    font-family: 'VT323', monospace;
+    font-size: 26px;
+    line-height: 147%;
+  }
+  
+  h1 {
+    font-family: 'VT323', monospace;
+    font-size: 90px;
+    color: #222;
+    text-transform: uppercase;
+    line-height: 64px;
+    
+  }
+  
+  h2 {}
+  
+  h3 {}
+  
+  p {
+    margin: 0;
+  }
+  
+  button {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+  }
+  
+  
+  /* ---- layout ---- */
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  main {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  body {
+    background-color: #F1F1E7;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* ---- components ---- */
+  
+  .container {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  canvas {
+    width: 100%;
+  }
+  
+
+  /* --- splash --- */
+  .intro,
+  .game-over {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 400px;
+  }
+
+  .intro h1 {
+    flex:1;
+    margin-bottom: 40px;
+    
+  }
+
+  .intro .rules {
+    flex:1;
+  }
+
+  .intro button {
+    flex: 1;
+  }
+
+
+  .button {
+    padding: 10px 25px;
+    background-color: #3F5CDC;
+    color: #F1F1E7;
+    border: none;
+  }
+
+  /* --- game --- */
+  
+  .game {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .game header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .game .lives {
+    flex: 1;
+  }
+  
+  .game .score {
+    flex: 1;
+  }
+  
+  .game .label {
+    font-weight: bold;
+  }
+  
+  .game .value {
+    font-style: italic;
+  }
+
+  /* --- game-over --- */
+
+  .game-over h1 {
+    flex:1;
+    margin-bottom: 40px;
+  }
+
+  .game-over p {
+    flex:1;
+  }
+
+  .game-over .buttons {
+    flex: 1;
+    display: flex;
+    justify-content: left;
+  }
+
+  .buttons .restart-button {
+    flex: 1;
+  }
+  
+  .buttons p {
+    flex: 1;
+    text-align: center;
+  }
+
+  .buttons .change-button {
+    flex: 1;
+  }
+
+  .change {
+    padding: 10px 25px;
+    background-color: #E3514C;
+    color: #F1F1E7;
+    border: none;
+  }
+  
+  /* ---- section ---- */
+  
+  

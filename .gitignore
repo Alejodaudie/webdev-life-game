@@ -25,3 +25,6 @@ Thumbs.db
 *.swp
 .Spotlight*
 .Trashes
+
+# SASS
+.sass-chace
