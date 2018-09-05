@@ -1,13 +1,16 @@
-
+@font-face {
+  font-family: 'VT323';
+  src: url('./font/VT323-Regular.ttf');
+}
   body {
     color: $text-color;
-    font-family: 'VT323', monospace;
+    font-family: 'VT323';
     font-size: 26px;
     line-height: 147%;
   }
   
   h1 {
-    font-family: 'VT323', monospace;
+    font-family: 'VT323';
     font-size: 90px;
     color: $text-color;
     text-transform: uppercase;
@@ -24,6 +27,6 @@
   }
   
   button {
-    font-family: 'VT323', monospace;
+    font-family: 'VT323';
     font-size: 20px;
   }

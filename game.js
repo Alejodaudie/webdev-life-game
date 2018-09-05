@@ -46,6 +46,7 @@ Game.prototype.start = function () {
             <div class="canvas">
                 <canvas></canvas>
             </div>
+            <audio><source type="audio/mpeg" /></audio>
         </main>
     `);
 
@@ -59,6 +60,9 @@ Game.prototype.start = function () {
 
     self.livesElement = self.gameMain.querySelector('.lives .value');
     self.scoreElement = self.gameMain.querySelector('.score .value');
+
+    self.audioElement = self.gameMain.querySelector('audio');
+    self.audioElement.src = './music/' + self.characterScreen.song;
     
 
     // self.width = self.canvasParentElement.offsetWidth;
@@ -71,7 +75,7 @@ Game.prototype.start = function () {
     self.canvasElement.setAttribute('width', self.width);
     self.canvasElement.setAttribute('height', self.height);
 
-    self.player = new Player(self.canvasElement, 5, self.characterScreen.characterSelectedImage);
+    self.player = new Player(self.canvasElement, 5, self.characterScreen.img);
 
     self.handleKeyDown = function(event) {
         if (event.key === 'ArrowLeft') {
@@ -91,7 +95,7 @@ Game.prototype.start = function () {
 
     function roundTime () {
         self.level++;
-        self.message = new Message (self.canvasElement.getContext('2d'), 'Level ' + self.level);
+        self.message = new Message (self.canvasElement, 'Level ' + self.level);
         
 
         setTimeout(function() {
@@ -116,9 +120,12 @@ Game.prototype.starLoop = function () {
             self.isPause = !self.isPause;
             if(!self.isPause) {
                 loop();
+                self.audioElement.play();
             }
         }
     });
+
+    self.audioElement.play();
 
     function loop () {
         
@@ -209,6 +216,8 @@ Game.prototype.starLoop = function () {
         // if game is not over
         if(!self.gameIsOver && !self.isPause) {
             window.requestAnimationFrame(loop);
+          } else {
+            self.audioElement.pause();
           }
     }
 

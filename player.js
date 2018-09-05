@@ -12,9 +12,8 @@ function Player (canvas, lives, image) {
     self.lives = lives;
     self.ctx = self.canvasElement.getContext('2d');
     self.character = new Image();
-    self.character.src = image;
+    self.character.src = image|| './images/diva.png';
 }
-
 
 Player.prototype.setDirection = function(direction) {
     var self = this;
