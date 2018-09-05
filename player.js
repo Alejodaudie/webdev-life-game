@@ -12,19 +12,9 @@ function Player (canvas, lives, image) {
     self.lives = lives;
     self.ctx = self.canvasElement.getContext('2d');
     self.character = new Image();
-    // self.charactersChoices = ["./images/player-barbara.png","./images/player-diana.png","./images/player-caroline.png","./images/player-axel.png","./images/player-gabriela.png","./images/player-francesca.png","./images/player-yenderly.png","./images/player-jonathan.png","./images/player-mariaj.png"];
     self.character.src = image;
 }
 
-Player.prototype.chooseImg = function() {
-    var self = this;
-
-    if (characterSelected === 'barbara') {
-        return self.charactersChoices[0];
-    } else if (characterSelected === 'diana') {
-        return self.charactersChoices[1];
-    }
-}
 
 Player.prototype.setDirection = function(direction) {
     var self = this;
@@ -68,10 +58,13 @@ Player.prototype.collidesWithLives = function (enemy) {
     return false;
 };
 
-Player.prototype.collidedLive = function () {
+Player.prototype.collidedLive = function (item) {
     var self = this;
-    
-    self.lives++;
+    if (item.liveImage.src.includes('andre')) {
+        self.lives += 2;
+    } else {
+        self.lives++;
+    }
 };
 
 Player.prototype.update = function() {

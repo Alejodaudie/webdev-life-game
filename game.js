@@ -7,6 +7,19 @@ function Game(username, characterScreen) {
     self.username = username;
     self.score = 0;
     self.isPause = false;
+
+
+    self.level = 1;
+    self.intervalId = 0;
+    self.rateEnemies;
+    self.ratePoints;
+    self.rateLives;
+    self.speedEnemies;
+    self.speedPoints;
+    self.speedLives;
+    self.message = '';
+
+
     self.highScore = 0;
     self.characterScreen = characterScreen;
 
@@ -75,6 +88,22 @@ Game.prototype.start = function () {
     self.enemies = [];
     self.points = [];
     self.lives = [];
+
+    function roundTime () {
+        self.level++;
+        self.message = new Message (self.canvasElement.getContext('2d'), 'Level ' + self.level);
+        
+
+        setTimeout(function() {
+            self.message = null;
+        }, 2000)
+
+        if (self.level >= 5) {
+            clearInterval(self.intervalId);
+        }
+        
+    }
+    self.intervalId = setInterval(roundTime, 15000);
 };
 
 Game.prototype.starLoop = function () {
@@ -92,23 +121,25 @@ Game.prototype.starLoop = function () {
     });
 
     function loop () {
+        
+        self.checkRound();
 
         // create more enemies now and then
-        if (Math.random() > 0.95) {
+        if (Math.random() > self.rateEnemies) {
             var x = self.canvasElement.width * Math.random();
-            self.enemies.push(new Enemy(self.canvasElement, x, 5));
+            self.enemies.push(new Enemy(self.canvasElement, x, self.speedEnemies));
         }
         
         // create more points now and then
-        if (Math.random() > 0.99) {
+        if (Math.random() > self.ratePoints) {
             var x = self.canvasElement.width * Math.random();
-            self.points.push(new Point(self.canvasElement, x, 6));
+            self.points.push(new Point(self.canvasElement, x, self.speedPoints));
         }
         
         // create more lives now and then
-        if (Math.random() > 0.999) {
+        if (Math.random() > self.rateLives) {
             var x = self.canvasElement.width * Math.random();
-            self.lives.push(new Live(self.canvasElement, x, 8));
+            self.lives.push(new Live(self.canvasElement, x, self.speedLives));
         }
 
         //update positions
@@ -138,7 +169,8 @@ Game.prototype.starLoop = function () {
         self.lives = self.lives.filter(function(item) {
             return item.isInScreen();
           });
-
+        
+        
 
         // check if player collide with enemy
         self.checkIfEnemiesCollidedPlayer();
@@ -155,7 +187,12 @@ Game.prototype.starLoop = function () {
         
 
         //draw
+        if (self.message) {
+            self.message.draw();
+        }
+
         self.player.draw();
+
 
         self.enemies.forEach(function(item) {
             item.draw();
@@ -191,6 +228,51 @@ Game.prototype.starLoop = function () {
 //     }
 // }
 
+Game.prototype.checkRound = function() {
+    var self = this;
+    
+    if(self.level === 1) {
+        self.rateEnemies = 0.98;
+        self.ratePoints = 0.991;
+        self.rateLives = 0.99999;
+
+        self.speedEnemies = 3;
+        self.speedPoints = 4;
+        self.speedLives = 4;
+    } else if (self.level === 2) {
+        self.rateEnemies = 0.97;
+        self.ratePoints = 0.99;
+        self.rateLives = 0.999;
+
+        self.speedEnemies = 4;
+        self.speedPoints = 5;
+        self.speedLives = 5;
+    } else if (self.level === 3) {
+        self.rateEnemies = 0.965;
+        self.ratePoints = 0.985;
+        self.rateLives = 0.994;
+
+        self.speedEnemies = 5;
+        self.speedPoints = 6;
+        self.speedLives = 8;
+    } else if (self.level === 4) {
+        self.rateEnemies = 0.96;
+        self.ratePoints = 0.985;
+        self.rateLives = 0.994;
+
+        self.speedEnemies = 6;
+        self.speedPoints = 7;
+        self.speedLives = 8;
+    }   else if (self.level === 5) {
+        self.rateEnemies = 0.955;
+        self.ratePoints = 0.985;
+        self.rateLives = 0.994;
+
+        self.speedEnemies = 7;
+        self.speedPoints = 8;
+        self.speedLives = 9;
+    }
+};
 
 Game.prototype.checkIfEnemiesCollidedPlayer = function() {
     var self = this;
@@ -213,7 +295,11 @@ Game.prototype.checkIfPointsCollidedPlayer = function () {
     self.points.forEach(function (item, index) {
       if (self.player.collidesWithEnemy(item)) {
         self.points.splice(index, 1);
-        self.score++;
+        if (self.level === 1) {
+            self.score++;
+        } else {
+            self.score +=2;
+        }
       };
     });
 };
@@ -223,7 +309,7 @@ Game.prototype.checkIfLivesCollidedPlayer = function () {
   
     self.lives.forEach(function (item, index) {
       if (self.player.collidesWithLives(item)) {
-        self.player.collidedLive();
+        self.player.collidedLive(item);
         self.lives.splice(index, 1);
       };
     });
