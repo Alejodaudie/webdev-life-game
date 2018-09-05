@@ -31,12 +31,9 @@ function main() {
                     <h1>Web <br>
                     Developer <br>
                     Life</h1>
-                    <div>
+                    <div class="input">
                         <label>Name :</label>
                         <input type="text" placeholder='Developer name'> 
-                    </div>
-                    <div class="rules">
-                        <p></p>
                     </div>
                     <div class="buttons">
                         <div>
@@ -44,6 +41,9 @@ function main() {
                         </div>
                         <div>
                             <button class="high-score-button">High Scores</button>
+                        </div>
+                        <div>
+                            <button class="rules">Rules</button>
                         </div>
                     </div>
                 </div>
@@ -126,13 +126,14 @@ function main() {
     }
 
     function buildGameOver(score) {
+
         gameOverMain = buildDom(`
-            <main>
+            <main class="container">
             <div class="game-over">
                 <h1>Game over</h1>
-                <p>Hey <span class='username'></span> this is your score : <span class='score'></span></p>
+                <p class="message">Hey <span class='username'></span> this is your score : <span class='score'></span></p>
                 <div class="list-high-scores">
-                    <h3>High score</h3>
+                    <h2>High score</h2>
                     <ul class="list-scores">
                         <li class="list-item0">
                             <p class="name0 name"></p>
@@ -152,7 +153,6 @@ function main() {
                     <div class="restart-buttons">
                         <button class="button">Play Again</button>
                     </div>
-                    <p> or </p>
                     <div class="change-buttons">
                         <button class="change">Change WebDev</button>
                     </div>
@@ -331,3 +331,4 @@ function main() {
 
 // @todo scorescreen from splash, exit button from game
 window.addEventListener('load', main);
+// window.screen.lockOrientation("landscape");

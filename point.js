@@ -4,7 +4,7 @@ function Point (canvas, x, speed) {
     var self = this;
 
     self.canvasElement = canvas;
-    self.size = 25;
+    self.size = 35;
     self.y = 0 - self.size;
     self.x = x;
     self.speed = speed;

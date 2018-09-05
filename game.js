@@ -65,11 +65,11 @@ Game.prototype.start = function () {
     self.audioElement.src = './music/' + self.characterScreen.song;
     
 
-    // self.width = self.canvasParentElement.offsetWidth;
-    // self.height = self.canvasParentElement.offsetHeight;
+    self.width = self.canvasParentElement.offsetWidth;
+    self.height = self.canvasParentElement.offsetHeight;
 
-    self.width = 700;
-    self.height = 400;
+    // self.width = 700;
+    // self.height = 400;
 
 
     self.canvasElement.setAttribute('width', self.width);

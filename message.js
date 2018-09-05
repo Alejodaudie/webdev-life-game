@@ -3,14 +3,14 @@ function Message (canvas, text) {
 
     self.canvasElement = canvas;
     self.ctx = self.canvasElement.getContext('2d');
-    self.x = 200;
-    self.y = 100;
+    self.x = self.canvasElement.width / 2 - 210;
+    self.y = self.canvasElement.height / 2 + 20;
     self.text = text;
 }
 
 Message.prototype.draw = function () {
     var self = this;
-    self.ctx.font = "50px VT323"
+    self.ctx.font = "150px VT323"
     self.ctx.fillStyle = "#222"
-    self.ctx.fillText(self.text, self.x, self.y, 300);
+    self.ctx.fillText(self.text, self.x, self.y);
 }

@@ -57,15 +57,88 @@
     }
 }
 
-@media (max-width: 1246px) {
+@media (max-width: 1600px) { //and (orientation : landscape) 
+
+    .characters-screen {
+      h1 {
+        font-size: 70px;
+        line-height: 52px;
+      }
+
+      .characters-icons {
+        img {
+            width: 100px;
+        }
+    }
+
+      .go-game {
+        button {
+          font-size: 14px;
+          padding: 10px 30px;
+        }
+      }
+
+    }
+}
+
+@media (min-width: 1075px) and (max-width: 1600px) {
     .characters-screen {
         h1 {
-            font-size: 50px;
+        font-size: 70px;
+        line-height: 52px;
         }
-        .characters-icons {
 
+        .characters-icons {
+        img {
+            width: 100px;
+        }
+    }
+
+        .go-game {
+            button {
+                font-size: 14px;
+                padding: 10px 30px;
+            }
+        }
+
+    }
+}
+
+@media (min-width: 600px) and (max-width: 1074px) {
+    .characters-screen {
+        h1 {
+        font-size: 40px;
+        line-height: 32px;
+        }
+
+        .characters-icons {
             img {
-                width: 100px;
+                width: 43px;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 599px) {
+    .characters-screen {
+        padding: 10px;
+
+        h1 {
+        font-size: 40px;
+        line-height: 32px;
+        }
+
+        .characters-icons {
+            img {
+                width: 30px;
+            }
+        }
+
+        .go-game {
+            button {
+                font-size: 14px;
+                padding: 10px 20px;
             }
         }
     }
