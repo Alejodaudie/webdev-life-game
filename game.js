@@ -1,6 +1,6 @@
 'use strict';
 
-function Game(username, character) {
+function Game(username, characterScreen) {
     var self = this;
 
     self.gameIsOver = false;
@@ -8,7 +8,8 @@ function Game(username, character) {
     self.score = 0;
     self.isPause = false;
     self.highScore = 0;
-    self.character = character;
+    self.characterScreen = characterScreen;
+
 }
 
 Game.prototype.start = function () {
@@ -57,7 +58,7 @@ Game.prototype.start = function () {
     self.canvasElement.setAttribute('width', self.width);
     self.canvasElement.setAttribute('height', self.height);
 
-    self.player = new Player(self.canvasElement, 5, self.character);
+    self.player = new Player(self.canvasElement, 5, self.characterScreen.characterSelectedImage);
 
     self.handleKeyDown = function(event) {
         if (event.key === 'ArrowLeft') {

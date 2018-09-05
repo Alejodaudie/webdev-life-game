@@ -1,5 +1,5 @@
 'use strict';
-var characterSelected;
+// var characterSelected;
 
 function buildDom(html) {
     var div = document.createElement('div');
@@ -71,7 +71,7 @@ function main() {
 
         usernameValue = usernameInputElement.value;
 
-        characterScreen = new Character(usernameValue, characterTransitionToPlay, characterTransitionToBack, characterSelected);
+        characterScreen = new Character(usernameValue, characterTransitionToPlay, characterTransitionToBack);
         characterScreen.display();
 
         characterScreen.toPlay(function() {
@@ -106,8 +106,8 @@ function main() {
         destroyGameOver();
         destroyHighScoreScreen();
 
-
-        game = new Game(usernameValue, characterSelected);
+        
+        game = new Game(usernameValue, characterScreen);
         game.start(); 
         game.onOver(function() {
             gameOverTransition(game.score);

@@ -1,6 +1,6 @@
 'use strict';
 
-function Player (canvas, lives) {
+function Player (canvas, lives, image) {
     var self = this;
 
     self.canvasElement = canvas;
@@ -12,8 +12,8 @@ function Player (canvas, lives) {
     self.lives = lives;
     self.ctx = self.canvasElement.getContext('2d');
     self.character = new Image();
-    self.charactersChoices = ["./images/player-barbara.png","./images/player-diana.png","./images/player-caroline.png","./images/player-axel.png","./images/player-gabriela.png","./images/player-francesca.png","./images/player-yenderly.png","./images/player-jonathan.png","./images/player-mariaj.png"];
-    self.character.src = self.chooseImg();
+    // self.charactersChoices = ["./images/player-barbara.png","./images/player-diana.png","./images/player-caroline.png","./images/player-axel.png","./images/player-gabriela.png","./images/player-francesca.png","./images/player-yenderly.png","./images/player-jonathan.png","./images/player-mariaj.png"];
+    self.character.src = image;
 }
 
 Player.prototype.chooseImg = function() {

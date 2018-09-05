@@ -7,7 +7,7 @@ function Character(username, callbackPlay, callbackBack) {
     self.letsPlay = false;
     self.cbPlay = callbackPlay;
     self.cbBack = callbackBack;
-    self.characterSelected;
+    self.characterSelectedImage;
 }
 
 Character.prototype.display = function () {
@@ -64,71 +64,17 @@ Character.prototype.display = function () {
     var buttonPlay = self.characterMain.querySelector('.button-play');
     buttonPlay.addEventListener('click', self.cbPlay);
 
-    self.barbara = self.characterMain.querySelector('.player1');
-    self.barbara.addEventListener('click', function(event) {
-        if (event) {
-            self.barbara.classList.toggle('selected');
-            characterSelected = 'barbara';
-        }
+    self.characters = self.characterMain.querySelector('.characters-icons');
+    self.characters.addEventListener('click', function(event) {
+            var selectedIcon =  self.characters.querySelector('.selected');
+            if (selectedIcon) {
+                selectedIcon.classList.remove('selected');
+            }
+            event.target.classList.toggle('selected');
+            self.characterSelectedImage = event.target.src;
     });
 
-    self.diana = self.characterMain.querySelector('.player2');
-    self.diana.addEventListener('click', function(event) {
-        if (event) {
-            self.diana.classList.toggle('selected');
-            characterSelected = 'diana';
-        }
-    });
-
-    self.caroline = self.characterMain.querySelector('.player3');
-    self.caroline.addEventListener('click', function(event) {
-        if (event) {
-            self.caroline.classList.toggle('selected');
-            
-        }
-    });
-
-    self.axel = self.characterMain.querySelector('.player4');
-    self.axel.addEventListener('click', function(event) {
-        if (event) {
-            self.axel.classList.toggle('selected');
-        }
-    });
-
-    self.gabriela = self.characterMain.querySelector('.player5');
-    self.gabriela.addEventListener('click', function(event) {
-        if (event) {
-            self.gabriela.classList.toggle('selected');
-        }
-    });
-
-    self.francesca = self.characterMain.querySelector('.player6');
-    self.francesca.addEventListener('click', function(event) {
-        if (event) {
-            self.francesca.classList.toggle('selected');
-        }
-    });
-
-    self.yenderly = self.characterMain.querySelector('.player7');
-    self.yenderly.addEventListener('click', function(event) {
-        if (event) {
-            self.yenderly.classList.toggle('selected');
-        }
-    });
-
-    self.jonathan = self.characterMain.querySelector('.player8');
-    self.jonathan.addEventListener('click', function(event) {
-        if (event) {
-            self.jonathan.classList.toggle('selected');
-        }
-    });
-
-    self.mariaj = self.characterMain.querySelector('.player9');
-    self.mariaj.addEventListener('click', function(event) {
-        if (event) {
-            self.mariaj.classList.toggle('selected');
-        }
-    });
+    
 
     
     
@@ -143,7 +89,7 @@ Character.prototype.display = function () {
 
 // }
 
-Character.prototype.toPlay = function (callback) {
+Character.prototype.toPlay = function (callback, characterSelectedImage) {
     var self = this;
 
     self.onCharacterCallback = callback;
@@ -155,12 +101,6 @@ Character.prototype.toBack = function (callback) {
     self.onCharacterCallback = callback;
 };
 
-Character.prototype.gameOver = function () {
-    var self = this;
-
-    self.letsPlay = true;
-    self.onCharacterCallback();
-};
 
 Character.prototype.destroy = function () {
     var self = this;
