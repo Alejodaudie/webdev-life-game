@@ -4,7 +4,7 @@ function Message (canvas, text) {
     self.canvasElement = canvas;
     self.ctx = self.canvasElement.getContext('2d');
     self.x = self.canvasElement.width / 2 - 210;
-    self.y = self.canvasElement.height / 2 + 20;
+    self.y = self.canvasElement.height / 2 + 30;
     self.text = text;
 }
 
