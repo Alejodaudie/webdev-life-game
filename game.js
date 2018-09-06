@@ -46,6 +46,14 @@ Game.prototype.start = function () {
             <div class="canvas">
                 <canvas></canvas>
             </div>
+            <div class="buttons-mobile">
+                <div>
+                    <button class="left">Left</button>
+                </div>
+                <div>
+                    <button class="right">Right</button>
+                </div>
+            </div>
             <audio><source type="audio/mpeg" /></audio>
         </main>
     `);
@@ -71,6 +79,8 @@ Game.prototype.start = function () {
     // self.width = 700;
     // self.height = 400;
 
+    
+
 
     self.canvasElement.setAttribute('width', self.width);
     self.canvasElement.setAttribute('height', self.height);
@@ -78,12 +88,19 @@ Game.prototype.start = function () {
     self.player = new Player(self.canvasElement, 5, self.characterScreen.img);
 
     self.handleKeyDown = function(event) {
-        if (event.key === 'ArrowLeft') {
+        if (event.key === 'ArrowLeft' || event.target.classList.contains('left')) {
           self.player.setDirection(-1);
-        } else if (event.key === 'ArrowRight') {
+        } else if (event.key === 'ArrowRight' || event.target.classList.contains('right')) {
           self.player.setDirection(1);
         }
     }
+
+    self.leftTouchButton = self.gameMain.querySelector('.left');
+    self.rightTouchButton = self.gameMain.querySelector('.right');
+    self.leftTouchButton.addEventListener('click', self.handleKeyDown);
+    self.rightTouchButton.addEventListener('click', self.handleKeyDown);
+
+    
 
     document.body.addEventListener('keydown', self.handleKeyDown)
 
