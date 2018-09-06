@@ -54,7 +54,8 @@ Game.prototype.start = function () {
                     <button class="right">Right</button>
                 </div>
             </div>
-            <audio><source type="audio/mpeg" /></audio>
+            <audio class="soundtrack"><source type="audio/mpeg" /></audio>
+            
         </main>
     `);
 
@@ -69,8 +70,12 @@ Game.prototype.start = function () {
     self.livesElement = self.gameMain.querySelector('.lives .value');
     self.scoreElement = self.gameMain.querySelector('.score .value');
 
-    self.audioElement = self.gameMain.querySelector('audio');
+    self.audioElement = self.gameMain.querySelector('.soundtrack');
     self.audioElement.src = './music/' + self.characterScreen.song;
+
+    self.pointsSound = new Audio("./music/collision-point.mp3");
+    self.enemiesSound = new Audio("./music/collision-enemies.mp3");
+    
     
 
     self.width = self.canvasParentElement.offsetWidth;
@@ -307,6 +312,8 @@ Game.prototype.checkIfEnemiesCollidedPlayer = function() {
         if (self.player.collidesWithEnemy(item)) {
             self.player.collided();
             self.enemies.splice(index,1);
+            self.enemiesSound.play();
+            self.enemiesSound.volume = 0.7;
 
             if (!self.player.lives) {
                 self.gameOver();
@@ -321,6 +328,9 @@ Game.prototype.checkIfPointsCollidedPlayer = function () {
     self.points.forEach(function (item, index) {
       if (self.player.collidesWithEnemy(item)) {
         self.points.splice(index, 1);
+        self.pointsSound.play();
+        self.pointsSound.volume = 0.7;
+
         if (self.level === 1) {
             self.score++;
         } else {
@@ -337,6 +347,8 @@ Game.prototype.checkIfLivesCollidedPlayer = function () {
       if (self.player.collidesWithLives(item)) {
         self.player.collidedLive(item);
         self.lives.splice(index, 1);
+        self.pointsSound.play();
+        self.pointsSound.volume = 0.7;
       };
     });
   };

@@ -129,36 +129,35 @@ function main() {
 
         gameOverMain = buildDom(`
             <main class="container">
-            <div class="game-over">
-                <h1>Game over</h1>
-                <p class="message">Hey <span class='username'></span> this is your score : <span class='score'></span></p>
-                <div class="list-high-scores">
-                    <h2>High score</h2>
-                    <ul class="list-scores">
-                        <li class="list-item0">
-                            <p class="name0 name"></p>
-                            <p class="score0"></p>
-                        </li>
-                        <li class="list-item1">
-                            <p class="name1 name"></p>
-                            <p class="score1"></p>
-                        </li>
-                        <li class="list-item2">
-                            <p class="name2 name"></p>
-                            <p class="score2"></p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="buttons">
-                    <div class="restart-buttons">
-                        <button class="button">Play Again</button>
+                <div class="game-over">
+                    <h1>Game over</h1>
+                    <p class="message">Hey <span class='username'></span> this is your score : <span class='score'></span></p>
+                    <div class="list-high-scores">
+                        <h2>High score</h2>
+                        <ul class="list-scores">
+                            <li class="list-item0">
+                                <p class="name0 name"></p>
+                                <p class="score0"></p>
+                            </li>
+                            <li class="list-item1">
+                                <p class="name1 name"></p>
+                                <p class="score1"></p>
+                            </li>
+                            <li class="list-item2">
+                                <p class="name2 name"></p>
+                                <p class="score2"></p>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="change-buttons">
-                        <button class="change">Change WebDev</button>
+                    <div class="buttons">
+                        <div class="restart-buttons">
+                            <button class="button">Play Again</button>
+                        </div>
+                        <div class="change-buttons">
+                            <button class="change">Change WebDev</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-                
             </main>
         `);
 
@@ -175,6 +174,8 @@ function main() {
 
         var username = gameOverMain.querySelector('.username');
         username.innerText = usernameValue;
+
+        
 
         var newScore;
 
@@ -197,6 +198,9 @@ function main() {
         if (listHighScores) {
             displayScores(3, listHighScores, gameOverMain)
         }
+
+        var audioGameOver = new Audio('./music/game-over.mp3')
+        audioGameOver.play();
 
     }
 
