@@ -12,6 +12,7 @@ function main() {
     var splashMain;
     var gameOverMain;
     var highScoreMain;
+    var rulesMain;
     var usernameInputElement;
     var usernameValue;
     var characterScreen;
@@ -24,6 +25,7 @@ function main() {
         destroyGameOver();
         destroyHighScoreScreen();
         destroyCharacterScreen();
+        destroyRulesScreen();
 
         splashMain = buildDom(`
             <main class="container">
@@ -60,10 +62,86 @@ function main() {
         var buttonHighscore = splashMain.querySelector('.high-score-button');
         buttonHighscore.addEventListener('click', highScoreScreen);
 
+        var buttonRules = splashMain.querySelector('.rules');
+        buttonRules.addEventListener('click', rulesScreen);
+
     }
 
     function destroySplash() {
         splashMain.remove();
+    }
+
+    function rulesScreen() {
+        destroySplash();
+
+        rulesMain = buildDom(`
+            <main class="container rules-screen">
+                <div class="description">
+                    <div class="button-esc">
+                        <button class="esc">x</button>
+                    </div>
+                    <h1>Rules</h1>
+                    <div class="text">
+                        <p class="game-intro">WebDeveloper's Life is a very simple game where the player can inpersonate a webdev and try to survive his typical day.</p>
+                        <p>The player will try to avoid using with <img src="./images/arrow-left.png"> and <img src="./images/arrow-right.png"> all the errors and to catch the points and the TAs.</p> 
+                    </div>
+                    <div class="images">
+                        <div class="enemies">
+                            <div>
+                                <img src="./images/error.png">
+                            </div>
+                            <div>
+                                <img src="./images/undifined.png">
+                            </div>
+                            <div>
+                                <img src="./images/unexpected.png">
+                            </div>
+                        </div>
+                        <div class="lives">
+                            <div>
+                                <img src="./images/rapha.png">
+                            </div>
+                            <div>
+                                <img src="./images/andre.png">
+                            </div>
+                            <div>
+                                <img src="./images/filipe.png">
+                            </div>
+                            <div>
+                                <img src="./images/seba.png">
+                            </div>
+                        </div>
+                        <div class="points">
+                            <div>
+                                <img src="./images/pingpong.png">
+                            </div>
+                            <div>
+                                <img src="./images/beer.png">
+                            </div>
+                            <div>
+                                <img src="./images/coffe.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rules">
+                        <p>Errors -1 live</p>
+                        <p>TAs +1 live and Andre +2 lives</p>
+                        <p>Points + score</p>
+                    </div>
+                </div>
+            </main>
+        `)
+
+        document.body.appendChild(rulesMain);
+
+        var returnSplash = rulesMain.querySelector('.esc');
+        returnSplash.addEventListener('click', buildSplash);
+    }
+
+    function destroyRulesScreen() {
+        if(rulesMain) {
+            rulesMain.remove();
+        }
     }
 
     function choseCharacter() {
@@ -174,8 +252,6 @@ function main() {
 
         var username = gameOverMain.querySelector('.username');
         username.innerText = usernameValue;
-
-        
 
         var newScore;
 
