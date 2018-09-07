@@ -266,45 +266,45 @@ Game.prototype.checkRound = function() {
     var self = this;
     
     if(self.level === 1) {
-        self.rateEnemies = 0.98;
-        self.ratePoints = 0.991;
-        self.rateLives = 0.99999;
-
-        self.speedEnemies = 3;
-        self.speedPoints = 4;
-        self.speedLives = 4;
-    } else if (self.level === 2) {
-        self.rateEnemies = 0.97;
-        self.ratePoints = 0.99;
-        self.rateLives = 0.999;
-
-        self.speedEnemies = 4;
-        self.speedPoints = 5;
-        self.speedLives = 5;
-    } else if (self.level === 3) {
-        self.rateEnemies = 0.965;
+        self.rateEnemies = 0.96;
         self.ratePoints = 0.985;
         self.rateLives = 0.994;
 
         self.speedEnemies = 5;
         self.speedPoints = 6;
         self.speedLives = 8;
-    } else if (self.level === 4) {
-        self.rateEnemies = 0.96;
+    } else if (self.level === 2) {
+        self.rateEnemies = 0.95;
         self.ratePoints = 0.985;
-        self.rateLives = 0.994;
+        self.rateLives = 0.995;
 
         self.speedEnemies = 6;
         self.speedPoints = 7;
-        self.speedLives = 8;
-    }   else if (self.level === 5) {
-        self.rateEnemies = 0.955;
-        self.ratePoints = 0.985;
-        self.rateLives = 0.994;
-
-        self.speedEnemies = 7;
-        self.speedPoints = 8;
         self.speedLives = 9;
+    } else if (self.level === 3) {
+        self.rateEnemies = 0.94;
+        self.ratePoints = 0.985;
+        self.rateLives = 0.996;
+
+        self.speedEnemies = 8;
+        self.speedPoints = 8;
+        self.speedLives = 10;
+    } else if (self.level === 4) {
+        self.rateEnemies = 0.9;
+        self.ratePoints = 0.98;
+        self.rateLives = 0.997;
+
+        self.speedEnemies = 8;
+        self.speedPoints = 9;
+        self.speedLives = 12;
+    }   else if (self.level === 5) {
+        self.rateEnemies = 0.80;
+        self.ratePoints = 0.98;
+        self.rateLives = 0.993;
+
+        self.speedEnemies = 10;
+        self.speedPoints = 11;
+        self.speedLives = 12;
     }
 };
 
