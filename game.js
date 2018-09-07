@@ -54,8 +54,7 @@ Game.prototype.start = function () {
                     <button class="right">Right</button>
                 </div>
             </div>
-            <audio class="soundtrack"><source type="audio/mpeg" /></audio>
-            
+            <audio class="soundtrack"><source type="audio/mpeg" /></audio>     
         </main>
     `);
 
@@ -71,7 +70,11 @@ Game.prototype.start = function () {
     self.scoreElement = self.gameMain.querySelector('.score .value');
 
     self.audioElement = self.gameMain.querySelector('.soundtrack');
-    self.audioElement.src = './music/' + self.characterScreen.song;
+    if(self.characterScreen.song) {
+        self.audioElement.src = './music/' + self.characterScreen.song;
+    } else {
+        self.audioElement.src = './music/diva.mp3';
+    }
 
     self.pointsSound = new Audio("./music/collision-point.mp3");
     self.enemiesSound = new Audio("./music/collision-enemies.mp3");
